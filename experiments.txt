@@ -1,0 +1,8 @@
+对照（用原始loss）：
+CUDA_VISIBLE_DEVICES=1 python main.py --dist-url 'tcp://localhost:10001' --data /data/zhaojiahe/HUAWEIAI/dataset --save_path /data/zhaojiahe/HUAWEIAI/checkpoints/full_resnet34_alpha0.25+0.75_ls0.01 --multiprocessing-distributed --batch-size 64 --lr 0.01 --pretrained --flip h v --udcrop 0.5 0.3 0.5 --translate --epochs 20 --schedule 12 16 --arch resnet34 --labelsmooth 0.01
+
+加 alpha-balanced loss （分类器0的alpha=0.25，分类器1-7的alpha=0.75）：
+CUDA_VISIBLE_DEVICES=1 python main.py --dist-url 'tcp://localhost:10001' --data /data/zhaojiahe/HUAWEIAI/dataset --save_path /data/zhaojiahe/HUAWEIAI/checkpoints/full_resnet34_alpha0.25+0.75_ls0.01 --multiprocessing-distributed --batch-size 64 --lr 0.01 --pretrained --flip h v --udcrop 0.5 0.3 0.5 --translate --epochs 20 --schedule 12 16 --arch resnet34 --alpha 0.25 0.75 --labelsmooth 0.01
+
+加 focal loss (gamma=2.0）：
+CUDA_VISIBLE_DEVICES=1 python main.py --dist-url 'tcp://localhost:10001' --data /data/zhaojiahe/HUAWEIAI/dataset --save_path /data/zhaojiahe/HUAWEIAI/checkpoints/full_resnet34_alpha0.25+0.75_ls0.01 --multiprocessing-distributed --batch-size 64 --lr 0.01 --pretrained --flip h v --udcrop 0.5 0.3 0.5 --translate --epochs 20 --schedule 12 16 --arch resnet34 --gamma 2.0--labelsmooth 0.01
